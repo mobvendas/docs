@@ -6,864 +6,879 @@
     <link rel=”shortcut icon” href=”img/favicon.ico”/>
     <title>Layout de Exportação e Importação MobVendas</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body data-offset="10" data-target="#navbar" data-spy="scroll">
-    <div class="page-header">
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <a class="navbar-brand" href="#">Integração MobVendas - Layout de Exportação e Importação</a>
-    </nav>
+  <body data-offset-top="60" data-target=".sidebar" data-spy="scroll">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <a class="brand" href="./">
+        <img alt="MobVendas Documentação API" src="http://mobvendas.jera.com.br/assets/logo-16a96b59f168fc2636162e59a7ca0e22.png">
+      </a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="nav-texto">Integração MobVendas - Layout de Importação e Exportação.</li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-md-3 well">
-      <div class="sidebar-nav">
-        <div>
-          <ul class="nav nav-list"> 
-            <li><a href="#introducao">Introdução</a></li>
-            <li><a href="#estrutura">Estrutura dos Arquivos</a></li>
-            <li><a href="#importacoes-mobvendas">Importações MobVendas (Cadastros)</a></li>
-              <ul>
-                <li><a href="#importacao-clientes">Clientes</a></li>
-                <li><a href="#importacao-produtos">Produtos</a></li>
-                <li><a href="#importacao-usuarios">Usuários</a></li>
-                <li><a href="#importacao-tabelas-preco">Tabelas de Preço</a></li>
-                <li><a href="#importacao-itens-tabelas-preco">Itens das Tabelas de Preço</a></li>
-                <li><a href="#importacao-fornecedores">Fornecedores</a></li>
-                <li><a href="#importacao-unidades-medidas">Unidades de Medidas</a></li>
-                <li><a href="#importacao-condicoes-pagamento">Condições de Pagamento</a></li>
-                <li><a href="#importacao-formas-pagamento">Formas de Pagamento</a></li>
-                <li><a href="#importacao-categoria-clientes">Categoria de Clientes</a></li>
-                <li><a href="#importacao-grupos-produtos">Grupos de Produtos</a></li>
-                <li><a href="#importacao-regioes">Regiões</a></li>
-              </ul>
-              <li><a href="#exportacoes-mobvendas">Exportações MobVendas</a></li>
-              <ul>
-                <li><a href="#exportacao-pedidos">Pedidos</a></li>
-                <li><a href="#exportacao-itens-pedidos">Itens dos Pedidos</a></li>
-              </ul>
-          </ul>
+  <div class="wrap">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="col-md-3">
+          <div class="span2 sidebar">
+            <ul class="nav nav-list affix-top">
+              <li class="nav-header">Documentação</li>
+              <li><a href="#introducao">Introdução</a></li>
+              <li><a href="#estrutura">Estrutura dos Arquivos</a></li>
+              <li class="nav-header">Importação MobVendas(Cadastros)</li>
+              <li><a href="#importacao-clientes">Clientes</a></li>
+              <li><a href="#importacao-produtos">Produtos</a></li>
+              <li><a href="#importacao-usuarios">Usuários</a></li>
+              <li><a href="#importacao-tabelas-preco">Tabelas de Preço</a></li>
+              <li><a href="#importacao-itens-tabelas-preco">Itens das Tabelas de Preço</a></li>
+              <li><a href="#importacao-fornecedores">Fornecedores</a></li>
+              <li><a href="#importacao-unidades-medidas">Unidades de Medidas</a></li>
+              <li><a href="#importacao-condicoes-pagamento">Condições de Pagamento</a></li>
+              <li><a href="#importacao-formas-pagamento">Formas de Pagamento</a></li>
+              <li><a href="#importacao-categoria-clientes">Categoria de Clientes</a></li>
+              <li><a href="#importacao-grupos-produtos">Grupos de Produtos</a></li>
+              <li><a href="#importacao-regioes">Regiões</a></li>
+              <li class="nav-header">Exportações MobVendas</li>
+              <li><a href="#exportacao-pedidos">Pedidos</a></li>
+              <li><a href="#exportacao-itens-pedidos">Itens dos Pedidos</a></li>
+            </ul>
+          </div>
         </div>
-      </div>  
+        <div class="span9 offset1">
+          <div class="row-fluid">
+            <div class="col-md-8" >
+            <hr>
+            <h2 id="introducao">Introdução</h2>
+            <div class="well">
+              <p>
+                Este documento descreve o layout de importação dos cadastros no formato TXT, e a exportação das vendas também no formato TXT através da API por intermédio do Sincronizador MobVendas. A finalidade é prover integração do sistema do parceiro com o sistema MobVendas.
+              </p>
+            </div>
+
+            <h2 id="estrutura">Estrutura dos Arquivos</h2>
+            <div class="well">
+              <p>
+                Todos os arquivos que irão interagir com o Sincronizador MobVendas deverão estar no formato TXT utilizando codificação UTF-8, com os campos separados por pipe (" <strong>|</strong> ").
+              </p>
+              <p><strong>Nota: </strong> O tamanho máximo dos campos não precisa obrigatóriamente ser ocupado entre um pipe e outro, serve apenas como 
+                orientação para que não ultrapasse o tamanho das colunas das tabelas no banco de dados.</p>
+            </div>
+            
+            <h2 id="importacoes-mobvendas">Importações MobVendas (Cadastros)</h2>
+            <hr>
+            <h3 id="importacao-clientes">Clientes</h3>
+            <h4>Nome do Arquivo: Cliente.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Nome Fantasia</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Razão Social</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Faixa de Preço</td>
+                  <td>11</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Tipo ("F" - Física ou "J" - Jurídica)</td>
+                  <td>1</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>CPF/CNPJ (Sem Máscara)</td>
+                  <td>14</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Insc. Estadual ou RG (Sem Máscara)</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>E-Mail</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Telefone</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Telefone 2</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Celular</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Celular 2</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Fax</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Logradouro</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Número</td>
+                  <td>10</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Complemento</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Bairro</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Região</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>CEP (Sem Máscara)</td>
+                  <td>15</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Código da Cidade (Padrão IBGE)</td>
+                  <td>25</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Código da UF (Padrão IBGE)</td>
+                  <td>25</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Nome da Cidade</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>        
+
+                <tr>
+                  <td>Nome da UF</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>  
+              </table>
+            </div>
+            <h3 id="importacao-produtos">Produtos</h3>
+            <h4>Nome do Arquivo: Produto.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Preço 1</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Preço 2</td>
+                  <td>20</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Preço 3</td>
+                  <td>20</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Preço 4</td>
+                  <td>20</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Preço 5</td>
+                  <td>20</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Código da Unidade de Medidas</td>
+                  <td>5</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Código de Barras</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Código do Fabricante</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Peso</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Quantidade em Estoque</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Imagem 1</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Imagem 2</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Imagem 3</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Imagem 4</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Imagem 5</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+              </table>
+            </div>
+            <h3 id="importacao-usuarios">Usuários</h3>
+            <h4>Nome do Arquivo: Usuarios.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Nome</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>CPF (Sem máscara)</td>
+                  <td>11</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>E-mail</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Ativo ("S" - SIM ou "N" - NÃO)</td>
+                  <td>1</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-tabelas-preco">Tabelas de Preço</h3>
+            <h4>Nome do Arquivo: TabelaPreco.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Nome</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Data Inicial (DD/MM/AAAA)</td>
+                  <td>10</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Data Final (DD/MM/AAAA)</td>
+                  <td>10</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Observação</td>
+                  <td>255</td>
+                  <td>Não</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-itens-tabelas-preco">Itens das Tabelas de Preço</h3>
+            <h4>Nome do Arquivo: ItemTabelaPreco.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código da tabela pai</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Código do Produto</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Acréscimo</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Desconto</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Quantidade Mínima</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Preço Unitário</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Valor Total</td>
+                  <td>30</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-fornecedores">Fornecedores</h3>
+            <h4>Nome do Arquivo: Fornecedor.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Razão Social</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Nome Fantasia</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Telefone 1</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Telefone 2</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+         
+                <tr>
+                  <td>E-Mail</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Fax</td>
+                  <td>30</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Logradouro</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Número</td>
+                  <td>10</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Complemento</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Bairro</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Região</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>CEP (Sem Máscara)</td>
+                  <td>15</td>
+                  <td>NÃO</td>
+                </tr>
+
+                <tr>
+                  <td>Código da Cidade (Padrão IBGE)</td>
+                  <td>25</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Código da UF (Padrão IBGE)</td>
+                  <td>25</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Nome da Cidade</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr>        
+
+                <tr>
+                  <td>Nome da UF</td>
+                  <td>255</td>
+                  <td>NÃO</td>
+                </tr> 
+              </table>
+            </div>
+
+            <h3 id="importacao-unidades-medidas">Unidades de Medidas</h3>
+            <h4>Nome do Arquivo: UnidadeMedida.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Sigla</td>
+                  <td>5</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-condicoes-pagamento">Condições de Pagamento</h3>
+            <h4>Nome do Arquivo: CondicaoPagamento.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+               
+              </table>
+            </div>
+
+            <h3 id="importacao-formas-pagamento">Formas de Pagamento</h3>
+            <h4>Nome do Arquivo: FormaPagamento.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-categoria-clientes">Categorias de Clientes</h3>
+            <h4>Nome do Arquivo: CategoriaCliente.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-grupos-produtos">Grupos de Produtos</h3>
+            <h4>Nome do Arquivo: GrupoProduto.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="importacao-regioes">Regiões</h3>
+            <h4>Nome do Arquivo: Regiao.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho Máximo</th>
+                  <th>Obrigatório</th>
+                </tr>  
+
+                <tr>
+                  <td>Código</td>
+                  <td>20</td>
+                  <td>SIM</td>
+                </tr>
+
+                <tr>
+                  <td>Descrição</td>
+                  <td>255</td>
+                  <td>SIM</td>
+                </tr>
+              </table>
+            </div>
+
+            <h2 id="exportacoes-mobvendas">Exportações MobVendas</h2>
+            <div class="well">
+              <p>O sincronizador mobvendas exporta os pedidos realizados através dos smartphones e através da web.
+                 Os pedidos serão separados por pastas numeradas com o código do vendedor.
+              </p>
+            </div>
+            <hr>
+            <h3 id="exportacao-pedidos">Pedidos</h3>
+            <h4>Nome do Arquivo: arqped.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho</th>
+                  <th>Observações</th>
+                </tr>  
+
+                <tr>
+                  <td>Número do Pedido</td>
+                  <td>8</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Data de cadastro do pedido</td>
+                  <td>10</td>
+                  <td>Formato: DD/MM/AAAA</td>
+                </tr>
+
+                <tr>
+                  <td>Código do cliente</td>
+                  <td>15</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Descrição da condição de pagamento</td>
+                  <td>20</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Código do vendedor</td>
+                  <td>6</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Valor total do pedido</td>
+                  <td>8</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Código forma de pagamento</td>
+                  <td>2</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Código condição de pagamento</td>
+                  <td>3</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Código fornecedor</td>
+                  <td>4</td>
+                  <td>Preenche com 4 zeros se não tem fornecedor cadastrado</td>
+                </tr>
+
+                <tr>
+                  <td>CPF/CNPJ do cliente</td>
+                  <td>18</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+
+            <h3 id="exportacao-itens-pedidos">Itens dos Pedidos</h3>
+            <h4>Nome do Arquivo: arqipe.txt</h4>
+            <div class="well">
+              <table class="table">
+                <tr>
+                  <th>Campo</th>
+                  <th>Tamanho</th>
+                  <th>Observações</th>
+                </tr>  
+
+                <tr>
+                  <td>Número do Pedido</td>
+                  <td>8</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Código do Produto</td>
+                  <td>15</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Preço de Venda</td>
+                  <td>8</td>
+                  <td>Já com desconto</td>
+                </tr>
+
+                <tr>
+                  <td>Quantidade Vendida</td>
+                  <td>8</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td>Desconto Percentual</td>
+                  <td>6</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="col-md-12" >
+              <center>Atualizado em 29/08/2013</center>
+            </div>
+            <br/>
+          </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-md-8" >
-    <hr>
-    <h2 id="introducao">Introdução</h2>
-    <div class="well">
-      <p>
-        Este documento descreve o layout de importação dos cadastros no formato TXT, e a exportação das vendas também no formato TXT através da API por intermédio do Sincronizador MobVendas. A finalidade é prover integração do sistema do parceiro com o sistema MobVendas.
-      </p>
-    </div>
-
-    <h2 id="estrutura">Estrutura dos Arquivos</h2>
-    <div class="well">
-      <p>
-        Todos os arquivos que irão interagir com o Sincronizador MobVendas deverão estar no formato TXT utilizando codificação UTF-8, com os campos separados por pipe (" <strong>|</strong> ").
-      </p>
-      <p><strong>Nota: </strong> O tamanho máximo dos campos não precisa obrigatóriamente ser ocupado entre um pipe e outro, serve apenas como 
-        orientação para que não ultrapasse o tamanho das colunas das tabelas no banco de dados.</p>
-    </div>
-    
-    <h2 id="importacoes-mobvendas">Importações MobVendas (Cadastros)</h2>
-    <hr>
-    <h3 id="importacao-clientes">Clientes</h3>
-    <h4>Nome do Arquivo: Cliente.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Nome Fantasia</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Razão Social</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Faixa de Preço</td>
-          <td>11</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Tipo ("F" - Física ou "J" - Jurídica)</td>
-          <td>1</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>CPF/CNPJ (Sem Máscara)</td>
-          <td>14</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Insc. Estadual ou RG (Sem Máscara)</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>E-Mail</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Telefone</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Telefone 2</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Celular</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Celular 2</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Fax</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Logradouro</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Número</td>
-          <td>10</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Complemento</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Bairro</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Região</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>CEP (Sem Máscara)</td>
-          <td>15</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Código da Cidade (Padrão IBGE)</td>
-          <td>25</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Código da UF (Padrão IBGE)</td>
-          <td>25</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Nome da Cidade</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>        
-
-        <tr>
-          <td>Nome da UF</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>  
-      </table>
-    </div>
-    <h3 id="importacao-produtos">Produtos</h3>
-    <h4>Nome do Arquivo: Produto.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Preço 1</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Preço 2</td>
-          <td>20</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Preço 3</td>
-          <td>20</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Preço 4</td>
-          <td>20</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Preço 5</td>
-          <td>20</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Código da Unidade de Medidas</td>
-          <td>5</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Código de Barras</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Código do Fabricante</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Peso</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Quantidade em Estoque</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Imagem 1</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Imagem 2</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Imagem 3</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Imagem 4</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Imagem 5</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-      </table>
-    </div>
-    <h3 id="importacao-usuarios">Usuários</h3>
-    <h4>Nome do Arquivo: Usuarios.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Nome</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>CPF (Sem máscara)</td>
-          <td>11</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>E-mail</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-tabelas-preco">Tabelas de Preço</h3>
-    <h4>Nome do Arquivo: TabelaPreco.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Nome</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Data Inicial (DD/MM/AAAA)</td>
-          <td>10</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Data Final (DD/MM/AAAA)</td>
-          <td>10</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Observação</td>
-          <td>255</td>
-          <td>Não</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-itens-tabelas-preco">Itens das Tabelas de Preço</h3>
-    <h4>Nome do Arquivo: ItemTabelaPreco.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código da tabela pai</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Código do Produto</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Acréscimo</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Desconto</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Quantidade Mínima</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Preço Unitário</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Valor Total</td>
-          <td>30</td>
-          <td>SIM</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-fornecedores">Fornecedores</h3>
-    <h4>Nome do Arquivo: Fornecedor.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Razão Social</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Nome Fantasia</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Telefone 1</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Telefone 2</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Fax</td>
-          <td>30</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>E-Mail</td>
-          <td>255/td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Logradouro</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Número</td>
-          <td>10</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Complemento</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Bairro</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Região</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>CEP (Sem Máscara)</td>
-          <td>15</td>
-          <td>NÃO</td>
-        </tr>
-
-        <tr>
-          <td>Código da Cidade (Padrão IBGE)</td>
-          <td>25</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Código da UF (Padrão IBGE)</td>
-          <td>25</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Nome da Cidade</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr>        
-
-        <tr>
-          <td>Nome da UF</td>
-          <td>255</td>
-          <td>NÃO</td>
-        </tr> 
-      </table>
-    </div>
-
-    <h3 id="importacao-unidades-medidas">Unidades de Medidas</h3>
-    <h4>Nome do Arquivo: UnidadeMedida.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Sigla</td>
-          <td>5</td>
-          <td>SIM</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-condicoes-pagamento">Condições de Pagamento</h3>
-    <h4>Nome do Arquivo: CondicaoPagamento.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Sigla</td>
-          <td>5</td>
-          <td>NÃO</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-formas-pagamento">Formas de Pagamento</h3>
-    <h4>Nome do Arquivo: FormaPagamento.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Sigla</td>
-          <td>5</td>
-          <td>NÃO</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-categoria-clientes">Categorias de Clientes</h3>
-    <h4>Nome do Arquivo: CategoriaCliente.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-grupos-produtos">Grupos de Produtos</h3>
-    <h4>Nome do Arquivo: GrupoProduto.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="importacao-regioes">Regiões</h3>
-    <h4>Nome do Arquivo: Regiao.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho Máximo</th>
-          <th>Obrigatório</th>
-        </tr>  
-
-        <tr>
-          <td>Código</td>
-          <td>20</td>
-          <td>SIM</td>
-        </tr>
-
-        <tr>
-          <td>Descrição</td>
-          <td>255</td>
-          <td>SIM</td>
-        </tr>
-      </table>
-    </div>
-
-    <h2 id="exportacoes-mobvendas">Exportações MobVendas</h2>
-    <div class="well">
-      <p>O sincronizador mobvendas exporta os pedidos realizados através dos smartphones e através da web.
-         Os pedidos serão separados por pastas numeradas com o código do vendedor.
-      </p>
-    </div>
-    <hr>
-    <h3 id="exportacao-pedidos">Pedidos</h3>
-    <h4>Nome do Arquivo: arqped.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho</th>
-          <th>Observações</th>
-        </tr>  
-
-        <tr>
-          <td>Número do Pedido</td>
-          <td>8</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Data de cadastro do pedido</td>
-          <td>10</td>
-          <td>Formato: DD/MM/AAAA</td>
-        </tr>
-
-        <tr>
-          <td>Código do cliente</td>
-          <td>15</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Descrição da condição de pagamento</td>
-          <td>20</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Código do vendedor</td>
-          <td>6</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Valor total do pedido</td>
-          <td>8</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Código forma de pagamento</td>
-          <td>2</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Código condição de pagamento</td>
-          <td>3</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Código fornecedor</td>
-          <td>4</td>
-          <td>Preenche com 4 zeros se não tem fornecedor cadastrado</td>
-        </tr>
-
-        <tr>
-          <td>CPF/CNPJ do cliente</td>
-          <td>18</td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
-
-    <h3 id="exportacao-itens-pedidos">Itens dos Pedidos</h3>
-    <h4>Nome do Arquivo: arqipe.txt</h4>
-    <div class="well">
-      <table class="table">
-        <tr>
-          <th>Campo</th>
-          <th>Tamanho</th>
-          <th>Observações</th>
-        </tr>  
-
-        <tr>
-          <td>Número do Pedido</td>
-          <td>8</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Código do Produto</td>
-          <td>15</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Preço de Venda</td>
-          <td>8</td>
-          <td>Já com desconto</td>
-        </tr>
-
-        <tr>
-          <td>Quantidade Vendida</td>
-          <td>8</td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>Desconto Percentual</td>
-          <td>6</td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="col-md-12" >
-      <center>Atualizado em 29/08/2013</center>
-    </div>
-    <br/>
   </div>
+
+ 
+  
+    
+      
+      
+    
+    
   </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
